@@ -1,0 +1,1 @@
+*完成部分SplashActivity,GuideActivity的开发

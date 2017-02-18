@@ -15,6 +15,15 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    
+    <style 
+        name="app_desc_percent"
+        >
+        <item name="android:layout_width">8dp</item>
+        <item name="android:layout_height">8dp</item>
     </style>
 
 </resources>
