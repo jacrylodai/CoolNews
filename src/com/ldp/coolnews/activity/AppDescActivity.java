@@ -14,13 +14,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.ldp.coolnews.R;
+import com.ldp.coolnews.ui.GuidePercentView;
 
 public class AppDescActivity extends ActionBarActivity {
 
 	private ViewPager vpAppDesc;
 	
 	private static int[] sGuideIdArr = new int[]{
-		R.drawable.guide_1,R.drawable.guide_2,R.drawable.guide_3};
+		R.drawable.splash_horse_newyear,R.drawable.guide_1
+		,R.drawable.splash_horse_newyear,R.drawable.guide_2,R.drawable.guide_3};
 	
 	private List<ImageView> mIVDescList;
 	
@@ -36,6 +38,7 @@ public class AppDescActivity extends ActionBarActivity {
 		llPercentContainer = (LinearLayout) findViewById(R.id.ll_percent_container);
 		
 		initAppDesc();
+		initPercent();
 
 		AppDescPagerAdapter adapter = new AppDescPagerAdapter();
 		vpAppDesc.setAdapter(adapter);
@@ -50,6 +53,16 @@ public class AppDescActivity extends ActionBarActivity {
 			ivDesc.setImageResource(sGuideIdArr[i]);
 			
 			mIVDescList.add(ivDesc);
+		}
+	}
+	
+	private void initPercent(){
+		
+		for(int i=0;i<sGuideIdArr.length;i++){
+			
+			GuidePercentView percentView = new GuidePercentView(this);
+			percentView.setPercentBackground(R.drawable.shape_guide_percent);
+			llPercentContainer.addView(percentView);
 		}
 	}
 

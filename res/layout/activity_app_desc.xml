@@ -24,37 +24,12 @@
 	        android:layout_height="wrap_content"
 	        android:orientation="horizontal"
 	        >
-	        
-	        <View 
-		        android:layout_width="16dp"
-		        android:layout_height="16dp"
-		        android:layout_marginLeft="4dp"
-		        android:layout_marginRight="4dp"
-		        android:background="@drawable/shape_guide_percent"
-		        />
-	        
-	        <View 
-		        android:layout_width="16dp"
-		        android:layout_height="16dp"
-		        android:layout_marginLeft="4dp"
-		        android:layout_marginRight="4dp"
-		        android:background="@drawable/shape_guide_percent"
-		        />
-	        
-	        <View 
-		        android:layout_width="16dp"
-		        android:layout_height="16dp"
-		        android:layout_marginLeft="4dp"
-		        android:layout_marginRight="4dp"
-		        android:background="@drawable/shape_guide_percent"
-		        />
 	    </LinearLayout>
 	    
 	    <View 
 	        android:layout_width="16dp"
 	        android:layout_height="16dp"
-	        android:layout_marginLeft="4dp"
-	        android:layout_marginRight="4dp"
+	        android:layout_margin="4dp"
 	        android:background="@drawable/shape_guide_curr_percent"
 	        />
         
