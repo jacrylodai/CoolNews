@@ -38,5 +38,9 @@ public class GuidePercentView extends RelativeLayout {
 	public void setPercentBackground(int resId){
 		ivPercent.setBackgroundResource(resId);
 	}
+	
+	public ImageView getPercentImageView(){
+		return ivPercent;
+	}
 
 }
