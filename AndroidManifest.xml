@@ -26,6 +26,10 @@
         <activity 
             android:name=".activity.AppDescActivity"
             ></activity>
+        
+        <activity 
+            android:name=".activity.MainActivity"
+            ></activity>
     </application>
 
 </manifest>

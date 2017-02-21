@@ -3,6 +3,8 @@ package com.ldp.coolnews.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -16,20 +18,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 
 import com.ldp.coolnews.R;
 import com.ldp.coolnews.ui.GuidePercentView;
+import com.ldp.coolnews.utils.ConfigInfo;
 
 public class AppDescActivity extends ActionBarActivity {
 	
 	private static final String TAG = AppDescActivity.class.getSimpleName();
+	
+	private SharedPreferences mPref;
 
 	private ViewPager vpAppDesc;
 	
 	private static int[] sGuideIdArr = new int[]{
-		R.drawable.splash_horse_newyear,R.drawable.guide_1
-		,R.drawable.splash_horse_newyear,R.drawable.guide_2,R.drawable.guide_3};
+		R.drawable.guide_1,R.drawable.guide_2,R.drawable.guide_3};
 	
 	private List<ImageView> mIVDescList;
 	
@@ -50,6 +53,8 @@ public class AppDescActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_app_desc);
+		
+		mPref = getSharedPreferences(ConfigInfo.CONFIG_FILE_NAME, MODE_PRIVATE);
 
 		vpAppDesc = (ViewPager) findViewById(R.id.vp_app_desc);
 		llPercentContainer = (LinearLayout) findViewById(R.id.ll_percent_container);
@@ -69,6 +74,14 @@ public class AppDescActivity extends ActionBarActivity {
 			public void onClick(View v) {
 
 				Log.i(TAG, "You press the start button");
+				
+				mPref.edit()
+					.putBoolean(ConfigInfo.PREF_SHOW_APP_DESC, true)
+					.commit();
+				
+				Intent intent = new Intent(AppDescActivity.this,MainActivity.class);
+				startActivity(intent);
+				finish();
 			}
 		});
 		buttonStart.setVisibility(View.INVISIBLE);

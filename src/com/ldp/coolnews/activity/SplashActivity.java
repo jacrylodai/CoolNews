@@ -1,6 +1,7 @@
 package com.ldp.coolnews.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.animation.AlphaAnimation;
@@ -12,17 +13,22 @@ import android.view.animation.ScaleAnimation;
 import android.widget.RelativeLayout;
 
 import com.ldp.coolnews.R;
+import com.ldp.coolnews.utils.ConfigInfo;
 
 
 public class SplashActivity extends ActionBarActivity {
 	
 	private static final long DURATION_MILLIS = 1000;
 	private RelativeLayout rlSplash;
+	
+	private SharedPreferences mPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        
+        mPref = getSharedPreferences(ConfigInfo.CONFIG_FILE_NAME, MODE_PRIVATE);
         
         rlSplash = (RelativeLayout) findViewById(R.id.rl_splash);
         
@@ -32,6 +38,13 @@ public class SplashActivity extends ActionBarActivity {
 	private void goToAppDesc() {
 
 		Intent intent = new Intent(this,AppDescActivity.class);
+		startActivity(intent);
+		finish();
+	}
+	
+	private void goToMain(){
+
+		Intent intent = new Intent(this,MainActivity.class);
 		startActivity(intent);
 		finish();
 	}
@@ -72,7 +85,13 @@ public class SplashActivity extends ActionBarActivity {
 			@Override
 			public void onAnimationEnd(Animation animation) {
 
-				goToAppDesc();
+				boolean showAppDesc = mPref.getBoolean(
+						ConfigInfo.PREF_SHOW_APP_DESC, false);
+				if(showAppDesc){
+					goToMain();
+				}else{
+					goToAppDesc();
+				}
 			}
 		});
 		
