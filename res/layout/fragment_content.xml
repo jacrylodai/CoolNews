@@ -4,16 +4,43 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
     
-    <TextView 
+    <RadioGroup 
+        android:id="@+id/rg_tab_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:padding="12dp"
-        android:background="#D6FF73"
-        android:text="this is content"
-        android:textSize="18sp"
+        android:orientation="horizontal"
+        android:background="#8A8A8A"
+        >
         
-        />
+        <RadioButton 
+            android:id="@+id/rb_tab_home"
+            android:drawableTop="@drawable/selector_content_tab_home_radio"
+            android:text="首页"
+            style="@style/ContentTabRadioButtonStyle"
+            />
+        
+        <RadioButton 
+            android:id="@+id/rb_tab_news_center"
+            android:drawableTop="@drawable/selector_content_tab_news_center_radio"
+            android:text="新闻中心"
+            style="@style/ContentTabRadioButtonStyle"
+            />
+        
+        <RadioButton 
+            android:id="@+id/rb_tab_setting"
+            android:drawableTop="@drawable/selector_content_tab_setting_radio"
+            android:text="设置"
+            style="@style/ContentTabRadioButtonStyle"
+            />
+        
+    </RadioGroup>
+    
 
 </LinearLayout>
