@@ -5,6 +5,7 @@ import com.ldp.coolnews.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 
 public class TabContentSettingView extends TabContentView {
 
@@ -23,6 +24,7 @@ public class TabContentSettingView extends TabContentView {
 	protected void initChildCustomView(AttributeSet attrs){
 
 		tvTitle.setText("设置");
+		ibLeftMenu.setVisibility(View.INVISIBLE);
 		LayoutInflater.from(getContext()).inflate(
 				R.layout.view_detail_content_setting, flDetailContent);
 	}

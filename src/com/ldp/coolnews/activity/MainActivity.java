@@ -8,6 +8,7 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.ldp.coolnews.R;
 import com.ldp.coolnews.fragment.ContentFragment;
+import com.ldp.coolnews.fragment.ContentFragment.OnSlidingMenuShowStateChangeListener;
 import com.ldp.coolnews.fragment.LeftMenuFragment;
 
 public class MainActivity extends SlidingFragmentActivity {
@@ -44,6 +45,22 @@ public class MainActivity extends SlidingFragmentActivity {
 					.add(R.id.fl_fragment_container, contentFragment)
 					.commit();
 		}
+		
+		ContentFragment convContentFragment = (ContentFragment) contentFragment;
+		convContentFragment.setOnSlidingMenuShowStateChangeListener(new OnSlidingMenuShowStateChangeListener(){
+			
+			@Override
+			public void onSlidingMenuShowStateChange(boolean isShow) {
+				super.onSlidingMenuShowStateChange(isShow);
+				
+				SlidingMenu slidingMenu = getSlidingMenu();
+				if(isShow){
+					slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+				}else{
+					slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+				}
+			}
+		});
 	}
 
 	private void initLeftMenuFragment() {

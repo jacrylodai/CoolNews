@@ -5,11 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.ldp.coolnews.R;
 import com.ldp.coolnews.ui.TabContentHomeView;
@@ -21,11 +22,16 @@ public class ContentFragment extends Fragment {
 	
 	private static final String TAG = ContentFragment.class.getSimpleName();
 	
+	/**
+	 * 标签页面的数量
+	 */
 	private static final int TAB_CONTENT_VIEW_LENGTH = 3; 
 	
 	private ViewPager vpContentPager;
 	
 	private RadioGroup rgTabGroup;
+	
+	private OnSlidingMenuShowStateChangeListener onShowStateChangeListener;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -37,6 +43,66 @@ public class ContentFragment extends Fragment {
 		rgTabGroup = (RadioGroup) view.findViewById(R.id.rg_tab_group);
 		
 		vpContentPager.setAdapter(new ContentPagerAdapter());
+		
+		vpContentPager.setOnPageChangeListener(new OnPageChangeListener() {
+			
+			@Override
+			public void onPageSelected(int position) {
+				
+				//切换SlidingMenu是否显示，首页和设置不显示，新闻中心要显示
+				switch (position) {
+				case 0:
+					onShowStateChangeListener.onSlidingMenuShowStateChange(false);
+					break;
+
+				case 1:
+					onShowStateChangeListener.onSlidingMenuShowStateChange(true);
+					break;
+
+				case 2:
+					onShowStateChangeListener.onSlidingMenuShowStateChange(false);
+					break;
+
+				default:
+					break;
+				}
+			}
+			
+			@Override
+			public void onPageScrolled(int position, float positionOffset,
+					int positionOffsetPixels) {
+				
+			}
+			
+			@Override
+			public void onPageScrollStateChanged(int state) {
+				
+			}
+		});
+		
+		rgTabGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+				switch (checkedId) {
+				case R.id.rb_tab_home:
+					vpContentPager.setCurrentItem(0);
+					break;
+
+				case R.id.rb_tab_news_center:
+					vpContentPager.setCurrentItem(1);
+					break;
+
+				case R.id.rb_tab_setting:
+					vpContentPager.setCurrentItem(2);
+					break;
+
+				default:
+					break;
+				}
+			}
+		});
 		rgTabGroup.check(R.id.rb_tab_home);
 		
 		return view;
@@ -91,6 +157,26 @@ public class ContentFragment extends Fragment {
 			container.removeView((View) object);
 		}
 		
+	}
+	
+	public void setOnSlidingMenuShowStateChangeListener(OnSlidingMenuShowStateChangeListener onShowStateChangeListener){
+		this.onShowStateChangeListener = onShowStateChangeListener;
+	}
+	
+	/**
+	 * 点击下面标签，切换不同的界面，侧滑菜单状态改变的监听接口
+	 * @author jacrylodai
+	 *
+	 */
+	public static class OnSlidingMenuShowStateChangeListener {
+		
+		/**
+		 * 
+		 * @param isShow 是否显示侧滑菜单
+		 */
+		public void onSlidingMenuShowStateChange(boolean isShow){
+			
+		}
 	}
 	
 }
