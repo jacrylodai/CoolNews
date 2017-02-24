@@ -1,4 +1,4 @@
-package com.ldp.coolnews.utils;
+package com.ldp.coolnews.global;
 
 public class ConfigInfo {
 	

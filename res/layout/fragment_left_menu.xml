@@ -2,17 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#3D1E08" >
     
-    <TextView 
+    <ListView 
+        android:id="@+id/lv_menu_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:padding="12dp"
-        android:background="#D6FF73"
-        android:text="this is left menu"
-        android:textSize="18sp"
-        
-        />
+        ></ListView>
 
 </LinearLayout>

@@ -52,5 +52,7 @@ public abstract class TabContentView extends RelativeLayout {
 	}
 	
 	protected abstract void initChildCustomView(AttributeSet attrs);
+	
+	public abstract void initData();
 
 }

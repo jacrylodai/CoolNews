@@ -29,4 +29,10 @@ public class TabContentSettingView extends TabContentView {
 				R.layout.view_detail_content_setting, flDetailContent);
 	}
 
+	@Override
+	public void initData() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

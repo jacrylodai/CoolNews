@@ -20,8 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.ldp.coolnews.R;
+import com.ldp.coolnews.global.ConfigInfo;
 import com.ldp.coolnews.ui.GuidePercentView;
-import com.ldp.coolnews.utils.ConfigInfo;
 
 public class AppDescActivity extends ActionBarActivity {
 	
@@ -132,7 +132,7 @@ public class AppDescActivity extends ActionBarActivity {
 				if(sGuideIdArr.length == 1){
 					mPercentDistance = 0;
 				}else{
-					//È¡µÃ2µãÖ®¼äµÄ¼ä¾à
+					//È¡ï¿½ï¿½2ï¿½ï¿½Ö®ï¿½ï¿½Ä¼ï¿½ï¿½
 					GuidePercentView gvFirstPercent = 
 							(GuidePercentView) llPercentContainer.getChildAt(0);
 					GuidePercentView gvSecondPercent = 
@@ -142,10 +142,10 @@ public class AppDescActivity extends ActionBarActivity {
 					mPercentDistance = secondLeft - firstLeft;
 				}
 				Log.i(TAG, "mPercentDistance:"+mPercentDistance);
-				//È¡µÃµ±Ç°½Úµã×ó±ßµÄ»ù´¡¼ä¾à
+				//È¡ï¿½Ãµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ßµÄ»ï¿½ï¿½ï¿½
 				mCurrentPercentBaseLeft = ivCurrentPercent.getLeft();
 				Log.i(TAG, "mCurrentPercentBaseLeft:"+mCurrentPercentBaseLeft);
-				//ÉèÖÃÒ³ÃæÌø×ªµÄ¼àÌýÆ÷
+				//ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½×ªï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
 				vpAppDesc.setOnPageChangeListener(new AppDescOnPageChangerListener());
 				
 				rlPercentAll.getViewTreeObserver().removeGlobalOnLayoutListener(this);
@@ -196,11 +196,11 @@ public class AppDescActivity extends ActionBarActivity {
 			sb.append("---");
 			sb.append("positionOffsetPixels:"+positionOffsetPixels);
 			Log.i(TAG, sb.toString());
-			//¼ÆËãµ±Ç°Ïà¶Ô¸¸ÊÓÍ¼×ó±ßµÄ¼ä¾à
+			//ï¿½ï¿½ï¿½ãµ±Ç°ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ßµÄ¼ï¿½ï¿½
 			int currentLeft = (int) (mCurrentPercentBaseLeft 
 					+ (position+positionOffset)*mPercentDistance);
 			Log.i(TAG, "currentLeft:"+currentLeft);
-			//ÉèÖÃ×ó¼ä¾à
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			RelativeLayout.LayoutParams currPercParams = 
 					(RelativeLayout.LayoutParams) ivCurrentPercent.getLayoutParams();
 			currPercParams.leftMargin = currentLeft;

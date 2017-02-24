@@ -1,11 +1,15 @@
 package com.ldp.coolnews.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,16 +26,26 @@ public class ContentFragment extends Fragment {
 	
 	private static final String TAG = ContentFragment.class.getSimpleName();
 	
-	/**
-	 * 标签页面的数量
-	 */
-	private static final int TAB_CONTENT_VIEW_LENGTH = 3; 
+	private List<TabContentView> mTabContentViewList;
 	
 	private ViewPager vpContentPager;
 	
 	private RadioGroup rgTabGroup;
 	
 	private OnSlidingMenuShowStateChangeListener onShowStateChangeListener;
+
+	private ContentPagerAdapter mContentPagerAdapter;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		mTabContentViewList = new ArrayList<TabContentView>();
+		
+		mTabContentViewList.add(new TabContentHomeView(getActivity()));
+		mTabContentViewList.add(new TabContentNewsCenterView(getActivity()));
+		mTabContentViewList.add(new TabContentSettingView(getActivity()));
+	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -42,12 +56,16 @@ public class ContentFragment extends Fragment {
 		vpContentPager = (ViewPager) view.findViewById(R.id.vp_content_pager);
 		rgTabGroup = (RadioGroup) view.findViewById(R.id.rg_tab_group);
 		
-		vpContentPager.setAdapter(new ContentPagerAdapter());
+		mContentPagerAdapter = new ContentPagerAdapter();
+		vpContentPager.setAdapter(mContentPagerAdapter);
 		
 		vpContentPager.setOnPageChangeListener(new OnPageChangeListener() {
 			
 			@Override
 			public void onPageSelected(int position) {
+				
+				TabContentView tabContentView = mTabContentViewList.get(position);
+				tabContentView.initData();
 				
 				//切换SlidingMenu是否显示，首页和设置不显示，新闻中心要显示
 				switch (position) {
@@ -80,6 +98,8 @@ public class ContentFragment extends Fragment {
 			}
 		});
 		
+		vpContentPager.setCurrentItem(0);
+		
 		rgTabGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
 			@Override
@@ -103,39 +123,17 @@ public class ContentFragment extends Fragment {
 				}
 			}
 		});
+		
 		rgTabGroup.check(R.id.rb_tab_home);
 		
 		return view;
 	}
 	
-	private TabContentView getTabContentViewByIndex(int index){
-		
-		TabContentView tabContentView = null;
-		switch (index) {
-		case 0:
-			tabContentView = new TabContentHomeView(getActivity());
-			break;
-
-		case 1:
-			tabContentView = new TabContentNewsCenterView(getActivity());
-			break;
-
-		case 2:
-			tabContentView = new TabContentSettingView(getActivity());
-			break;
-
-		default:
-			break;
-		}
-		
-		return tabContentView;
-	}
-
 	private class ContentPagerAdapter extends PagerAdapter{
 
 		@Override
 		public int getCount() {
-			return TAB_CONTENT_VIEW_LENGTH;
+			return mTabContentViewList.size();
 		}
 
 		@Override
@@ -146,7 +144,7 @@ public class ContentFragment extends Fragment {
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
 			
-			TabContentView tabContentView = getTabContentViewByIndex(position);
+			TabContentView tabContentView = mTabContentViewList.get(position);
 			
 			container.addView(tabContentView);
 			return tabContentView;

@@ -29,4 +29,10 @@ public class TabContentHomeView extends TabContentView {
 				R.layout.view_detail_content_home, flDetailContent);
 	}
 
+	@Override
+	public void initData() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -13,7 +13,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.RelativeLayout;
 
 import com.ldp.coolnews.R;
-import com.ldp.coolnews.utils.ConfigInfo;
+import com.ldp.coolnews.global.ConfigInfo;
 
 
 public class SplashActivity extends ActionBarActivity {
